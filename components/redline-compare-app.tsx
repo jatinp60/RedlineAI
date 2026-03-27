@@ -675,6 +675,16 @@ function InlineSegment({ segment }: { segment: DiffSegment }) {
     return <span>{segment.text}</span>;
   }
 
+  if (segment.type === "modify") {
+    return (
+      <>
+        <span className="rounded-lg bg-amber-100 px-1.5 py-0.5 text-amber-950 line-through">{segment.oldText}</span>
+        <span className="mx-1 text-slate-300">→</span>
+        <span className="rounded-lg bg-amber-100 px-1.5 py-0.5 text-amber-950">{segment.newText}</span>
+      </>
+    );
+  }
+
   if (segment.type === "add") {
     return <span className="rounded-lg bg-emerald-100 px-1.5 py-0.5 text-emerald-900">{segment.text}</span>;
   }
@@ -682,14 +692,6 @@ function InlineSegment({ segment }: { segment: DiffSegment }) {
   if (segment.type === "remove") {
     return <span className="rounded-lg bg-rose-100 px-1.5 py-0.5 text-rose-900 line-through">{segment.text}</span>;
   }
-
-  return (
-    <>
-      <span className="rounded-lg bg-amber-100 px-1.5 py-0.5 text-amber-950 line-through">{segment.oldText}</span>
-      <span className="mx-1 text-slate-300">→</span>
-      <span className="rounded-lg bg-amber-100 px-1.5 py-0.5 text-amber-950">{segment.newText}</span>
-    </>
-  );
 }
 
 function ChangeTile({
