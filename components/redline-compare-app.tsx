@@ -647,6 +647,14 @@ function PaneSegment({ segment, side }: { segment: DiffSegment; side: "original"
     return <span>{segment.text}</span>;
   }
 
+  if (segment.type === "modify") {
+    if (side === "original") {
+      return <span className="rounded-lg bg-amber-100 px-1.5 py-0.5 text-amber-950 line-through">{segment.oldText}</span>;
+    }
+
+    return <span className="rounded-lg bg-amber-100 px-1.5 py-0.5 text-amber-950">{segment.newText}</span>;
+  }
+
   if (segment.type === "add") {
     if (side === "original") {
       return null;
@@ -660,12 +668,6 @@ function PaneSegment({ segment, side }: { segment: DiffSegment; side: "original"
     }
     return <span className="rounded-lg bg-rose-100 px-1.5 py-0.5 text-rose-900 line-through">{segment.text}</span>;
   }
-
-  if (side === "original") {
-    return <span className="rounded-lg bg-amber-100 px-1.5 py-0.5 text-amber-950 line-through">{segment.oldText}</span>;
-  }
-
-  return <span className="rounded-lg bg-amber-100 px-1.5 py-0.5 text-amber-950">{segment.newText}</span>;
 }
 
 function InlineSegment({ segment }: { segment: DiffSegment }) {
