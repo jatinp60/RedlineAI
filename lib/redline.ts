@@ -210,7 +210,11 @@ export function toPlaintextDiff(segments: DiffSegment[]) {
         return `[Removed] ${segment.text}`;
       }
 
-      return `[Modified] ${segment.oldText} -> ${segment.newText}`;
+      if (segment.type === "modify") {
+        return `[Modified] ${segment.oldText} -> ${segment.newText}`;
+      }
+
+      return "";
     })
     .join("");
 }
